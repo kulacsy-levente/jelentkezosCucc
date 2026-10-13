@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a2463">
+  <meta name="robots" content="noindex">
+  <title>Admin – Nyílt nap jelentkezések</title>
+  <link rel="icon" href="img/ntszki.webp" type="image/webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+
+  <!-- Bejelentkezés -->
+  <div class="login-wrap" id="loginView" hidden>
+    <div class="login-card">
+      <img class="hero-logo" src="img/ntszki.webp" alt="Iskola logó" width="112" height="112">
+      <h1>Admin panel</h1>
+      <p>Nyílt napi jelentkezések kezelése</p>
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label class="label" for="password">Jelszó</label>
+          <input class="input" id="password" name="password" type="password" autocomplete="current-password" required>
+        </div>
+        <div class="alert" id="loginError" role="alert" hidden></div>
+        <button class="btn btn-primary btn-block" type="submit" id="loginBtn">Belépés</button>
+      </form>
+      <a class="back-link" href="./">← Vissza a jelentkezéshez</a>
+    </div>
+  </div>
+
+  <!-- Vezérlőpult -->
+  <div id="dashView" hidden>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <img class="topbar-logo" src="img/ntszki.webp" alt="" width="48" height="48">
+        <div class="topbar-title">
+          <strong>Nyílt nap – jelentkezések</strong>
+          <span>Nádasdy Tamás Technikum és Kollégium</span>
+        </div>
+        <button class="btn btn-sm" type="button" id="refreshBtn" title="Frissítés">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>
+          <span class="btn-label">Frissítés</span>
+        </button>
+        <button class="btn btn-sm" type="button" id="logoutBtn" title="Kilépés">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
+          <span class="btn-label">Kilépés</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="admin-main">
+      <!-- Összesítő -->
+      <section class="stats" id="stats" aria-label="Összesítés"></section>
+
+      <!-- Szakok szerint -->
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Szakok szerinti bontás</h2>
+            <p class="hint">Egy jelentkező több szakot is megjelölhet. Koppints egy szakra a jelentkezői listához.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Szak</th>
+                <th class="num">Összes</th>
+                <th class="num">Végzős</th>
+                <th class="num">Kollégista</th>
+                <th class="num">Végzős és kollégista</th>
+              </tr>
+            </thead>
+            <tbody id="specTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Jelentkezők -->
+      <section class="panel" id="listPanel">
+        <div class="panel-head">
+          <div>
+            <h2>Jelentkezők</h2>
+            <p class="result-count" id="resultCount"></p>
+          </div>
+        </div>
+        <div class="filters">
+          <label class="sr-only" for="search">Keresés</label>
+          <input class="input search" id="search" type="search" placeholder="Keresés névre vagy iskolára…">
+          <label class="sr-only" for="fSpec">Szak</label>
+          <select class="input" id="fSpec"><option value="">Minden szak</option></select>
+          <label class="sr-only" for="fLast">Végzős</label>
+          <select class="input" id="fLast">
+            <option value="">Végzős és nem végzős</option>
+            <option value="1">Csak végzősök</option>
+            <option value="0">Csak nem végzősök</option>
+          </select>
+          <label class="sr-only" for="fDorm">Lakhatás</label>
+          <select class="input" id="fDorm">
+            <option value="">Kollégista és bejárós</option>
+            <option value="1">Csak kollégisták</option>
+            <option value="0">Csak bejárósok</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Név / iskola</th>
+                <th>Érdeklődés</th>
+                <th>Lakhatás</th>
+                <th>Végzős</th>
+                <th>Időpont</th>
+                <th><span class="sr-only">Művelet</span></th>
+              </tr>
+            </thead>
+            <tbody id="appTable"></tbody>
+          </table>
+        </div>
+        <div class="empty" id="appEmpty" hidden></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Törlés megerősítése -->
+  <dialog id="confirmDialog">
+    <div class="dialog-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg></div>
+    <h3>Jelentkezés törlése</h3>
+    <p id="confirmText"></p>
+    <form method="dialog" class="dialog-actions">
+      <button class="btn btn-ghost btn-sm" value="cancel">Mégse</button>
+      <button class="btn btn-danger btn-sm" value="ok" id="confirmOk">Törlés</button>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/api.js?v=2"></script>
+  <script src="js/admin.js?v=2"></script>
+</body>
+</html>

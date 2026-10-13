@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a2463">
+  <title>Nyílt nap - Nádasdy Tamás Technikum és Kollégium</title>
+  <link rel="icon" href="img/ntszki.webp" type="image/webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+  <div class="reg-layout">
+
+    <!-- Iskolai panel -->
+    <aside class="hero">
+      <div class="hero-top">
+        <img class="hero-logo" src="img/ntszki.webp" alt="A Nádasdy Tamás Technikum és Kollégium logója" width="112" height="112">
+        <p class="hero-school">VVMSZC Nádasdy Tamás Technikum és Kollégium</p>
+        <h1 class="hero-title">Nyílt nap <span>regisztráció</span></h1>
+        <p class="hero-lead">Ismerd meg a szakmáinkat, a tanárainkat és a kollégiumot! Pár kattintás az egész, és már tudjuk is, mire vagy kíváncsi.</p>
+      </div>
+
+      <ul class="hero-points">
+        <li>
+          <span class="pt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></span>
+          Modern, keresett szakmák
+        </li>
+        <li>
+          <span class="pt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v12h14V9"/><path d="M10 21v-6h4v6"/></svg></span>
+          Saját kollégium
+        </li>
+        <li>
+          <span class="pt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6"/><path d="M16 4a4 4 0 0 1 0 8"/><path d="M22 21c0-3-1.5-5-4-5.7"/></svg></span>
+          Barátságos közösség
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Űrlap -->
+    <main class="reg-main">
+      <div class="reg-card">
+
+        <form id="regForm" novalidate>
+          <header class="reg-head">
+            <h2>Jelentkezés a nyílt napra</h2>
+            <p>Töltsd ki az alábbi mezőket, és kattints a <strong>Jelentkezem</strong> gombra.</p>
+          </header>
+
+          <!-- 1. Adatok -->
+          <section class="section">
+            <div class="section-head">
+              <span class="step">1</span>
+              <h3>Adataid</h3>
+            </div>
+
+            <div class="field" data-field="fullname">
+              <label class="label" for="fullname">Teljes név</label>
+              <input class="input" id="fullname" name="fullname" type="text" placeholder="pl. Kiss Anna" autocomplete="name" autocapitalize="words" maxlength="255">
+              <span class="error-msg"></span>
+            </div>
+
+            <div class="field" data-field="school">
+              <label class="label" for="school">Melyik iskolából érkezel?</label>
+              <input class="input" id="school" name="school" type="text" placeholder="pl. Csepregi Általános Iskola" autocomplete="off" maxlength="255">
+              <span class="error-msg"></span>
+            </div>
+          </section>
+
+          <!-- 2. Szakok -->
+          <section class="section" data-field="specIds">
+            <div class="section-head">
+              <span class="step">2</span>
+              <div>
+                <h3>Mely szakok érdekelnek?</h3>
+                <p class="hint">Többet is választhatsz.</p>
+              </div>
+            </div>
+            <div class="spec-grid" id="specList" aria-live="polite">
+              <div class="skeleton"></div><div class="skeleton"></div>
+              <div class="skeleton"></div><div class="skeleton"></div>
+            </div>
+            <span class="error-msg"></span>
+          </section>
+
+          <!-- 3. Kollégium -->
+          <section class="section" data-field="isDorm">
+            <div class="section-head">
+              <span class="step">3</span>
+              <h3>Kollégista lennél vagy bejárós?</h3>
+            </div>
+            <div class="choice-grid" role="radiogroup" aria-label="Kollégista vagy bejárós">
+              <label class="choice">
+                <input type="radio" name="isDorm" value="1">
+                <span class="choice-body">
+                  <span class="choice-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20V8"/><path d="M2 16h20"/><path d="M22 20v-7a3 3 0 0 0-3-3h-8v6"/><circle cx="6.5" cy="11.5" r="2"/></svg></span>
+                  <span><span class="choice-title">Kollégista</span><span class="choice-sub">A kollégiumban laknék</span></span>
+                </span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="isDorm" value="0">
+                <span class="choice-body">
+                  <span class="choice-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="15" rx="3"/><path d="M4 11h16"/><path d="M8 18v3"/><path d="M16 18v3"/><circle cx="8" cy="14.5" r=".8" fill="currentColor"/><circle cx="16" cy="14.5" r=".8" fill="currentColor"/></svg></span>
+                  <span><span class="choice-title">Bejárós</span><span class="choice-sub">Naponta otthonról járnék</span></span>
+                </span>
+              </label>
+            </div>
+            <span class="error-msg"></span>
+          </section>
+
+          <!-- 4. Végzős -->
+          <section class="section" data-field="isLastYear">
+            <div class="section-head">
+              <span class="step">4</span>
+              <div>
+                <h3>Végzős vagy?</h3>
+                <p class="hint">Idén fejezed be az általános iskolát és felvételizel?</p>
+              </div>
+            </div>
+            <div class="choice-grid" role="radiogroup" aria-label="Végzős vagy">
+              <label class="choice">
+                <input type="radio" name="isLastYear" value="1">
+                <span class="choice-body">
+                  <span class="choice-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/><path d="M22 10v6"/></svg></span>
+                  <span><span class="choice-title">Igen, végzős vagyok</span><span class="choice-sub">Idén felvételizem</span></span>
+                </span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="isLastYear" value="0">
+                <span class="choice-body">
+                  <span class="choice-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg></span>
+                  <span><span class="choice-title">Még nem</span><span class="choice-sub">Csak ismerkedem</span></span>
+                </span>
+              </label>
+            </div>
+            <span class="error-msg"></span>
+          </section>
+
+          <div class="alert form-error" id="formError" role="alert" hidden></div>
+
+          <div class="submit-row">
+            <button class="btn btn-primary btn-block" type="submit" id="submitBtn">
+              <span class="btn-text">Jelentkezem</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            </button>
+            <p class="privacy">Az adataidat kizárólag a nyílt nap szervezéséhez használjuk fel.</p>
+          </div>
+        </form>
+
+        <!-- Sikeres jelentkezés -->
+        <div class="success" id="successView" hidden>
+          <div class="success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
+          <h2 id="successTitle">Köszönjük!</h2>
+          <p>Sikeresen regisztráltál. Szeretettel várunk a nyílt napon!</p>
+          <button class="btn btn-primary" type="button" id="newBtn">Új jelentkezés</button>
+          <p class="countdown" id="countdown"></p>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/api.js?v=2"></script>
+  <script src="js/main.js?v=2"></script>
+</body>
+</html>
